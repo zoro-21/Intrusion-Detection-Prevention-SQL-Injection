@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Security Logs</h1>
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Timestamp (UTC)</th>
+          <th>IP</th>
+          <th>Endpoint</th>
+          <th>Payload</th>
+          <th>Action</th>
+          <th>Reasons</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in logs %}
+          <tr>
+            <td>{{ r['id'] }}</td>
+            <td>{{ r['ts'] }}</td>
+            <td>{{ r['ip'] }}</td>
+            <td>{{ r['endpoint'] }}</td>
+            <td><code>{{ r['payload'] }}</code></td>
+            <td>{{ r['action'] }}</td>
+            <td>{{ r['reasons'] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

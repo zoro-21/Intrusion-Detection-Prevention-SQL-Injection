@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Intrusion Detection & Prevention — SQL Injection</h1>
+  <p>Try searching users by <code>username</code>. Malicious inputs are blocked and logged.</p>
+
+  <form method="post" class="card">
+    <label>Search Username</label>
+    <input type="text" name="q" value="{{ q }}" placeholder="e.g., ali">
+    <button type="submit">Search</button>
+  </form>
+
+  {% if blocked %}
+    <div class="alert alert-danger">
+      <strong>Blocked</strong>: Your input was flagged as potentially malicious.
+      <ul>
+        {% for r in reasons %}<li>{{ r }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% elif results %}
+    <div class="card">
+      <h3>Results</h3>
+      <table>
+        <thead><tr><th>ID</th><th>Username</th><th>Email</th></tr></thead>
+        <tbody>
+          {% for row in results %}
+            <tr><td>{{ row['id'] }}</td><td>{{ row['username'] }}</td><td>{{ row['email'] }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  <div class="card mt">
+    <h3>Examples</h3>
+    <ul>
+      <li>Safe: <code>ali</code></li>
+      <li>Blocked: <code>ali' OR 1=1 --</code></li>
+      <li>Blocked: <code>UNION SELECT * FROM users</code></li>
+    </ul>
+  </div>
+{% endblock %}
