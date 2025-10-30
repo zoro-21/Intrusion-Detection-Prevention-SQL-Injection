@@ -1,5 +1,7 @@
 # Intrusion Detection & Prevention System (IDPS) — SQL Injection Demo
 
+Deployement site : http://127.0.0.1:5000/
+
 A lightweight, end-to-end demo project that **detects and blocks SQL Injection (SQLi)** attempts
 while ensuring safe database access via **parameterized queries**.
 
